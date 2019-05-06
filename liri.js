@@ -1,6 +1,7 @@
-var environment = require("dotenv").config();
+require("dotenv").config();
 var fs = require("fs");
 var keys = require("./keys.js");
+var Spotify = require("node-spotify-api");
 var spotify = new Spotify(keys.spotify);
 
 let inputSelector = [
@@ -11,6 +12,8 @@ let inputSelector = [
 ];
 
 let selector = process.argv[2].toLowerCase();
+
+// if statement to weed out
 let inputValue = process.argv[3].toLowerCase();
 
 //Take action based upon what is input.
