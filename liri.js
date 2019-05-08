@@ -11,10 +11,16 @@ let inputSelector = [
   "do-what-it-says"
 ];
 
-let selector = process.argv[2].toLowerCase();
+let selector =
+  process.argv[2] === undefined
+    ? process.argv[2]
+    : process.argv[2].toLowerCase();
 
 // if statement to weed out
-let inputValue = process.argv[3].toLowerCase();
+let inputValue =
+  process.argv[3] === undefined
+    ? process.argv[3]
+    : process.argv.splice(3).join("+");
 
 //Take action based upon what is input.
 switch (inputSelector.indexOf(selector)) {
