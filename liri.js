@@ -20,7 +20,7 @@ let selector =
 let inputValue =
   process.argv[3] === undefined
     ? process.argv[3]
-    : process.argv.splice(3).join("+");
+    : process.argv.splice(3).join(" ");
 
 //Take action based upon what is input.
 switch (inputSelector.indexOf(selector)) {
@@ -37,6 +37,9 @@ switch (inputSelector.indexOf(selector)) {
     whatever(inputValue);
     break;
   case -1:
+    console.log(
+      "Error.  PLease use one of the following selctors: concert-this, spotify-this-song, movie-this, or do-what-it-says."
+    );
     break;
 }
 
@@ -45,7 +48,21 @@ function concert(concert) {
 }
 
 function song(song) {
-  console.log("looking for song: " + song);
+  spotify.search(
+    { type: "track", query: song === undefined ? "The Sign" : song },
+    function(err, data) {
+      if (err) {
+        return console.log("Error occurred: " + err);
+      }
+
+      console.log("Artist: " + data.tracks.items[0].artists[0].name);
+      console.log("Song Name: " + data.tracks.items[0].name);
+      console.log(
+        "Preview Link: " + data.tracks.items[0].external_urls.spotify
+      );
+      console.log("Album Name: " + data.tracks.items[0].album.name);
+    }
+  );
 }
 
 function movie(movie) {
