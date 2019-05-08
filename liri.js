@@ -49,7 +49,10 @@ function concert(concert) {
 
 function song(song) {
   spotify.search(
-    { type: "track", query: song === undefined ? "The Sign" : song },
+    {
+      type: "track",
+      query: song === undefined ? "The Sign ace of base" : song
+    },
     function(err, data) {
       if (err) {
         return console.log("Error occurred: " + err);
