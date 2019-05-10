@@ -98,7 +98,36 @@ function song(song) {
 }
 
 function movie(movie) {
-  console.log("looking for movie: " + movie);
+  const newMovie = movie === undefined ? "i=tt0485947" : "t=" + movie;
+  console.log(newMovie);
+  axios
+    .get(
+      "http://www.omdbapi.com/?" + newMovie + "&y=&plot=short&apikey=trilogy"
+    )
+    .then(function(response) {
+      const tomato =
+        response.data.Ratings[1] === undefined
+          ? "no ratings"
+          : response.data.Ratings[1].Value;
+      console.log(response.data);
+      console.log("Title: " + response.data.Title);
+      console.log("Year: " + response.data.Year);
+      console.log("IMDB Rating: " + response.data.imdbRating);
+      console.log("Rotten Tomatoes: " + tomato);
+      console.log("Country: " + response.data.Country);
+      console.log("Language: " + response.data.Language);
+      console.log("Plot: " + response.data.Plot);
+      console.log("Actors: " + response.data.Actors);
+    })
+    .catch(function(error) {
+      if (error.response) {
+        console.log("No movie found");
+      } else if (error.request) {
+        console.log("No movie found");
+      } else {
+        console.log("No movie found");
+      }
+    });
 }
 
 function whatever(whatever) {
