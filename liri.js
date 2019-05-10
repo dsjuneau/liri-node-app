@@ -3,6 +3,8 @@ var fs = require("fs");
 var keys = require("./keys.js");
 var Spotify = require("node-spotify-api");
 var spotify = new Spotify(keys.spotify);
+var axios = require("axios");
+var moment = require("moment");
 
 let inputSelector = [
   "concert-this",
@@ -44,7 +46,34 @@ switch (inputSelector.indexOf(selector)) {
 }
 
 function concert(concert) {
-  console.log("looking for concert: " + concert);
+  const url =
+    "https://rest.bandsintown.com/artists/" +
+    concert +
+    "/events?app_id=codingbootcamp";
+
+  axios
+    .get(url)
+    .then(function(response) {
+      response.data.forEach(function(element) {
+        console.log("Name of venue: " + element.venue.name);
+        console.log(
+          "Location: " + element.venue.city + ", " + element.venue.region
+        );
+        console.log(
+          "Date of event: " + moment(element.datetime).format("MM/DD/YYYY")
+        );
+        console.log("===========================================");
+      });
+    })
+    .catch(function(error) {
+      if (error.response) {
+        console.log("No concert found");
+      } else if (error.request) {
+        console.log("No concert found");
+      } else {
+        console.log("No concert found");
+      }
+    });
 }
 
 function song(song) {
