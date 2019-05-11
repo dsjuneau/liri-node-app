@@ -13,3 +13,5 @@ SPOTIFY_SECRET="YOUR_SECRET"
 ```
 
 ## Link to video showing operation
+
+https://drive.google.com/file/d/1uPdfRQeMO6-xKiR21Crf8MPniEDAKbyt/view?usp=sharing
